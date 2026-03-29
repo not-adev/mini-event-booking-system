@@ -27,7 +27,7 @@ export const getAllEvents = async () => {
 
 
 
-export const createEvent = async ({ title, description, event_date, total_capacity }) => {
+export const createEvent = async ( title, description, event_date, total_capacity ) => {
     const connection = await pool.getConnection();
 
     try {
@@ -39,7 +39,7 @@ export const createEvent = async ({ title, description, event_date, total_capaci
             [title, description, event_date, total_capacity, total_capacity]
         );
 
-        
+
 
         return {
             id: result.insertId,
@@ -52,3 +52,53 @@ export const createEvent = async ({ title, description, event_date, total_capaci
         connection.release();
     }
 }
+
+
+export const markAttendance = async (booking_code) => {
+    const connection = await pool.getConnection();
+
+    try {
+
+
+       
+        const [bookings] = await connection.query(
+            "SELECT id FROM bookings WHERE booking_code = ?",
+            [booking_code]
+        );
+
+        if (bookings.length === 0) {
+            const error = new Error("Invalid booking code");
+            error.status = 404;
+            throw error;
+        }
+
+        const booking_id = bookings[0].id;
+
+       
+        const [attendance] = await connection.query(
+            "SELECT id FROM attendance WHERE booking_id = ?",
+            [booking_id]
+        );
+
+        if (attendance.length > 0) {
+            const error = new Error("Attendance already marked");
+            error.status = 400;
+            throw error;
+        }
+
+       
+        const [result] = await connection.query(
+            "INSERT INTO attendance (booking_id) VALUES (?)",
+            [booking_id]
+        );
+
+        return {
+            success: true,
+            attendance_id: result.insertId
+        };
+
+
+    } finally {
+        connection.release();
+    }
+};

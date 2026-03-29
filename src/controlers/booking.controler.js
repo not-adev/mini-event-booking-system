@@ -4,13 +4,15 @@ import * as bookingService from '../services/booking.service.js'
 export const createBooking = async (req, res) => {
 
     try {
-
-        const { user_id, event_id, tickets } = req.body;
+        console.log("booking controler")
+        console.log(req.body)
+        const { user_id, event_id, tickets_count } = req.body;
+        console.log(user_id, event_id, tickets_count )
 
         const result = await bookingService.createBooking(
             user_id,
             event_id,
-            tickets
+            tickets_count
         );
 
         res.status(201).json({

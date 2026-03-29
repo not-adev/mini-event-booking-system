@@ -45,7 +45,6 @@ CREATE TABLE attendance (
     id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id INT NOT NULL,
     entry_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     FOREIGN KEY (booking_id) REFERENCES bookings(id)
 );
 

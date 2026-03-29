@@ -1,7 +1,7 @@
 import { pool } from '../config/db.js'
 import { v4 as uuidv4 } from "uuid";
 
-export const createBooking = async ({ user_id, event_id, tickets_count }) => {
+export const createBooking = async (user_id, event_id, tickets_count) => {
     const connection = await pool.getConnection();
 
     try {
@@ -61,7 +61,7 @@ export const createBooking = async ({ user_id, event_id, tickets_count }) => {
 
 
 
-export const getUserBookings = async ({ user_id }) => {
+export const getUserBookings = async (user_id ) => {
     const connection = await pool.getConnection();
     try {
         const [bookings] = await connection.query(
