@@ -1,4 +1,4 @@
-const eventService = require("../services/event.service");
+import * as eventService from '../services/event.service.js'
 
 export const getEvents = async (req, res) => {
     try {

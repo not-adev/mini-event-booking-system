@@ -1,4 +1,5 @@
-// const bookingService = require("../services/bookingService");
+import * as bookingService from '../services/booking.service.js'
+
 
 export const createBooking = async (req, res) => {
 
