@@ -1,6 +1,6 @@
 import express from 'express'
-// const eventRoutes = require("./routes/eventRoutes");
-// const bookingRoutes = require("./routes/bookingRoutes");
+import {eventRoutes} from './routes/event.route.js'
+import { bookingRoutes } from './routes/booking.route.js';
 
 // const swaggerUi = require("swagger-ui-express");
 // const YAML = require("yamljs");
@@ -12,8 +12,8 @@ app.use(express.json());
 
 // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// app.use("/events", eventRoutes);
-// app.use("/bookings", bookingRoutes);
+app.use("/events", eventRoutes);
+app.use("/bookings", bookingRoutes);
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");
