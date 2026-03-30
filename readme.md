@@ -62,6 +62,7 @@ src/
 │
 ├── docs/
 │   └── swagger.yaml
+│   └── event_booking.postman_collection.json
 │
 └── app.js
 ```

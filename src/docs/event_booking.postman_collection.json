@@ -1,0 +1,132 @@
+{
+  "info": {
+    "_postman_id": "9bd47aff-0ecf-483f-8bad-421aeb09acf4",
+    "name": "event_booking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43055044"
+  },
+  "item": [
+    {
+      "name": "getAllEvents",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "AddEvent",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const tomorrow = pm.globals.set(\"tomorrow\", require('moment')().add(1, 'day').format(\"YYYY-MM-DD\"));\r",
+              "\r",
+              "const tomorrowFull = pm.globals.set(\"tomorrowTimestamp\", require('moment')().add(1, 'day').toISOString());"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Niritya Sangam\",\r\n    \"description\": \"A Niritya Sangam helod in delhi ncr \",\r\n    \"event_date\": \"2026-03-30\",\r\n    \"total_capacity\": 34\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/events",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "booking",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"user_id\" : 1 ,\r\n    \"event_id\" : 1 ,\r\n    \"tickets_count\" : 3 \r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/bookings",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "bookings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getUserbookings",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Niritya Sangam\",\r\n    \"description\": \"A Niritya Sangam helod in delhi ncr \",\r\n    \"event_date\": \"2026-03-30\",\r\n    \"total_capacity\": 34\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000//users/:id/bookings",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "",
+            "users",
+            ":id",
+            "bookings"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "attendece",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}

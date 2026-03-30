@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from 'express'
 import {eventRoutes} from './routes/event.route.js'
 import { bookingRoutes } from './routes/booking.route.js';
@@ -6,6 +7,7 @@ import swaggerUi from 'swagger-ui-express'
 import YAML  from 'yamljs';
 
 const app = express();
+
 app.use(express.json());
 app.use(logger)
 
