@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: Event Booking API
+  version: 1.0.0
+  description: Mini Event Management System API
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+
+  /events:
+    get:
+      summary: Get all events
+      responses:
+        200:
+          description: List of events
+        500 :
+          description : Internal Server error
+  
+    post:
+      summary: Create new event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - event_date
+                - total_capacity
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                event_date:
+                  type: string
+                  format: date-time
+                total_capacity:
+                  type: integer
+
+      responses:
+        201:
+          description: Event created
+        500 :
+          description : Internal Server error
+        400 :
+          description : bad request
+
+
+
+  /events/{id}/attendance:
+    post:
+      summary: Mark attendance for event
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - booking_code
+              properties:
+                booking_code:
+                  type: string
+
+      responses:
+        200:
+          description: Attendance marked
+        500 :
+          description : Internal Server error
+        400 :
+          description : bad request
+
+
+  /bookings:
+    post:
+      summary: Book tickets for an event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - event_id
+                - tickets_count
+              properties:
+                user_id:
+                  type: integer
+                event_id:
+                  type: integer
+                tickets_count:
+                  type: integer
+
+      responses:
+        200:
+          description: Booking successful
+        500 :
+          description : Internal Server error
+        400 :
+          description : bad request
+
+
+  /users/{id}/bookings:
+    get:
+      summary: Get all bookings of a specific user
+      description: Retrieve all event bookings made by a user.
+
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User ID
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: List of bookings for the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: All bookings of user
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        user_id:
+                          type: integer
+                        event_id:
+                          type: integer
+                        tickets_count:
+                          type: integer
+                        booking_code:
+                          type: string
+                        booking_date:
+                          type: string
+                          format: date-time
+                        title:
+                          type: string
+                        event_date:
+                          type: string
+                          format: date-time
+
+        "500":
+          description: Server error
+          content:
+            application/json:
+              example:
+                success: false
+                message: Internal Server Error
+        

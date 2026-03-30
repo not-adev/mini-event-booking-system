@@ -50,14 +50,14 @@ export const createEvent = async (req, res) => {
 export const markAttendance = async (req, res) => {
 
     try {
-        const { booking_id } = req.body
-        if (!booking_id){
+        const { booking_code } = req.body
+        if (!booking_code){
             res.send(400).json({
                 success : false,
                 message :'booking id required',
             })
         }
-        const attendence = await eventService.markAttendance(booking_id)
+        const attendence = await eventService.markAttendance(booking_code)
         res.status(200).json({
             success: true,
             message: "Attendance recorded successfully",
